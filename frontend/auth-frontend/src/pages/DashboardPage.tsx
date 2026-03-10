@@ -1,13 +1,32 @@
+import { useEffect, useState } from "react";
+import { getUser } from "../services/authService";
+
 function DashboardPage() {
 
-  const role = localStorage.getItem("role");
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    getUser()
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch(() => {
+        console.log("Not authenticated");
+      });
+  }, []);
+
+  if (!user) {
+    return <div className="p-10">Loading...</div>;
+  }
+
+  const role = user.role;
 
   return (
     <div className="p-10">
+
       <button
         onClick={() => {
           localStorage.removeItem("token");
-          localStorage.removeItem("role");
           window.location.href = "/";
         }}
         className="mb-6 bg-black text-white px-4 py-2 rounded"
@@ -19,8 +38,13 @@ function DashboardPage() {
         Dashboard
       </h1>
 
+      <div className="mb-6">
+        <p><b>Name:</b> {user.name}</p>
+        <p><b>Email:</b> {user.email}</p>
+      </div>
+
       <div className="grid grid-cols-2 gap-6">
-        {/*|| role === "ADMIN"  */}
+        {/*  || role === "ADMIN" */}
         {(role === "USER") && (
           <div className="p-6 border rounded shadow bg-blue-50">
             User Content

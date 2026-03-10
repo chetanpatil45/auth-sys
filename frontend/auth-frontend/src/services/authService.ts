@@ -7,22 +7,22 @@ const API = axios.create({
 export default API;
 
 export const registerUser = (data: any) => {
-  return API.post("/auth/register", data);
+  return API.post("/api/auth/register", data);
 };
 
 export const loginUser = (data: any) => {
-  return API.post("/auth/login", data);
+  return API.post("/api/auth/login", data);
 };
 
-export const getUser = (token: any) => {
-  return API.post("/auth/login", token);
+export const getUser = () => {
+  return API.get("/api/user/me");
 };
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (token) {
+
+  if (token && token !== "null") {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
   return config;
 });

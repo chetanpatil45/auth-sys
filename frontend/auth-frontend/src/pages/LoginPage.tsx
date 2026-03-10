@@ -15,17 +15,23 @@ function LoginPage() {
   const onSubmit = async (data: LoginForm) => {
     try {
       const response = await loginUser(data);
-      const token = response.data.token;
-
-      const user = await getUser(token);
-      const role = user.data.role;
-
+      console.log("LOGIN RESPONSE:", response.data);
+      
+      const token = response.data.jwt;
+      console.log("TOKEN:", token);
+      
       localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
+      console.log("LOCAL TOKEN:", localStorage.getItem("token"));
+      
+      const user = await getUser();
+      localStorage.setItem("role", user.data.role);
 
+      console.log(response);
+      console.log(user);
       navigate("/dashboard");
+
     } catch (error) {
-    console.log(error);
+      console.log(error);
       alert("Invalid credentials");
     }
   };
@@ -65,11 +71,8 @@ function LoginPage() {
             Register
           </Link>
         </p>
-
       </form>
     </div>
   );
 }
-
-
 export default LoginPage;
