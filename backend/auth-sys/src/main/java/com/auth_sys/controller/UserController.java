@@ -4,6 +4,7 @@ import com.auth_sys.dto.UserDto;
 import com.auth_sys.entity.User;
 import com.auth_sys.repository.UserRepository;
 import com.auth_sys.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/user")
+@Tag(name = "User")
 public class UserController {
 
     private final UserService userService;

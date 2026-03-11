@@ -29,7 +29,9 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**","/home").permitAll()
+                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/documentation/**", "/documentation-json/**","/swagger-ui/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/user/**").hasAnyRole("USER","ADMIN")
                         .anyRequest().authenticated()

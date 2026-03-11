@@ -6,6 +6,7 @@ import com.auth_sys.entity.User;
 import com.auth_sys.service.JwtService;
 import com.auth_sys.service.UserService;
 import com.auth_sys.util.UserMapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Authentication")
 public class AuthController {
     private final UserService userService;
     private final JwtService jwtService;
