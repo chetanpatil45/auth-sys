@@ -1,10 +1,9 @@
 package com.auth_sys.controller;
 
+import com.auth_sys.dto.UserDto;
 import com.auth_sys.entity.User;
 import com.auth_sys.repository.UserRepository;
 import com.auth_sys.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +27,15 @@ public class UserController {
 //    }
 
     @GetMapping("/me")
-    public User getCurrentUser(Authentication authentication) {
-        return userRepository
+    public UserDto getCurrentUser(Authentication authentication) {
+        User user = userRepository
                 .findByEmail(authentication.getName())
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return UserDto.builder()
+                .name(user.getName())
+                .role(user.getRole())
+                .email(user.getEmail())
+                .build();
     }
 }

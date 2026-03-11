@@ -1,5 +1,6 @@
 package com.auth_sys.entity;
 
+import com.auth_sys.util.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

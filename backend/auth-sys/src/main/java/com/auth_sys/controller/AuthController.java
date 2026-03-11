@@ -5,6 +5,7 @@ import com.auth_sys.dto.LoginResponse;
 import com.auth_sys.entity.User;
 import com.auth_sys.service.JwtService;
 import com.auth_sys.service.UserService;
+import com.auth_sys.util.UserMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,16 +19,19 @@ public class AuthController {
     private final UserService userService;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
-    public AuthController(UserService userService, JwtService jwtService, PasswordEncoder passwordEncoder) {
+    public AuthController(UserService userService, JwtService jwtService, PasswordEncoder passwordEncoder, UserMapper userMapper) {
         this.userService = userService;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
+        this.userMapper = userMapper;
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user){
-        return ResponseEntity.ok(userService.registerUser(user));
+        User savedUser = userService.registerUser(user);
+        return ResponseEntity.ok(userMapper.userToUserDto(savedUser));
     }
 
     @PostMapping("/login")
