@@ -221,6 +221,11 @@ http://localhost:5173
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/daae2872-a9c4-4a7e-9052-e971588cf725" />
 
 ---
+# Swagger UI
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0f3cbc1c-b837-428b-99d4-b23871d1918d" />
+
+
+---
 
 # Author
 **Chetan Bachchhav**
