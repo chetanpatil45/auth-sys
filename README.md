@@ -25,11 +25,6 @@ Users can register, log in, and access different content depending on their assi
 * React
 * TypeScript
 * Vite
-* React Router
-* React Query
-* Axios
-* React Hook Form
-* TailwindCSS
 
 ---
 
@@ -61,11 +56,12 @@ Two roles are implemented:
 
 ### API Access Rules
 
-| Endpoint      | Access |
-| ------------- | ------ |
-| `/api/public` | Public |
-| `/api/user`   | USER   |
-| `/api/admin`  | ADMIN  |
+| Endpoint         | Access |
+| ---------------- | ------ |
+| `/api/home`      | Public |
+| `/api/auth/**`   | Public |
+| `/api/user`      | USER   |
+| `/api/admin`     | ADMIN  |
 
 ---
 
@@ -97,6 +93,7 @@ project-root
 │   ├── entity
 │   ├── dto
 │   ├── security
+│   ├── util
 │   └── config
 │
 ├── frontend
@@ -115,8 +112,8 @@ project-root
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/auth-rbac-system.git
-cd auth-rbac-system
+git clone https://github.com/chetanpatil45/auth-sys.git
+cd auth-sys
 ```
 
 ### 2. Navigate to backend
@@ -137,9 +134,10 @@ Example:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/auth_db
-spring.datasource.username=root
-spring.datasource.password=yourpassword
+spring.datasource.username=<username>
+spring.datasource.password=<password>
 
+server.port=8081
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
@@ -163,13 +161,13 @@ mvn spring-boot:run
 Backend will start at:
 
 ```
-http://localhost:8080
+http://localhost:8081
 ```
 
 Swagger API documentation:
 
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:8081/documentation
 ```
 
 ---
@@ -216,37 +214,13 @@ http://localhost:5173
 6. Token is attached to API requests using **Axios interceptors**.
 7. Backend validates token and role before allowing access.
 
----
-
-# Bonus Features
-
-* Logout functionality
-* Password validation rules
-* Loading and error handling states
-* Responsive UI with TailwindCSS
 
 ---
 
-# Screenshots / Demo
-
-Screenshots and demo video are available in the repository.
+# Postman Collection
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/daae2872-a9c4-4a7e-9052-e971588cf725" />
 
 ---
 
 # Author
-
 **Chetan Bachchhav**
-
-GitHub:
-[https://github.com/chetanpatil45](https://github.com/chetanpatil45)
-
----
-
-If you want, I can also help you create a **much more impressive README (the kind that looks like senior developer repos)** with:
-
-* architecture diagram
-* API examples
-* JWT flow diagram
-* database schema
-
-which **really increases chances in interviews.**
